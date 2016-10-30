@@ -36,7 +36,10 @@ export function Duration (duration) {
 
     this._locale = getLocale();
 
-    this._bubble();
+    // _bubble returns a new Duration because immutability,
+    // but here in the constructor we need to update `this` with the new values
+    var bubbled = this._bubble();
+    copyDuration(this, bubbled);
 }
 
 export function isDuration (obj) {
